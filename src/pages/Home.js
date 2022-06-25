@@ -15,7 +15,7 @@ const Home = () => {
       history("/login");
     } else {
       axios
-        .get("http://localhost:3001/posts", {
+        .get("https://social-media-api-josscodes.herokuapp.com/posts", {
           headers: { accessToken: localStorage.getItem("accessToken") },
         })
         .then((response) => {
@@ -28,7 +28,7 @@ const Home = () => {
   const likeAPost = (postId) => {
     axios
       .post(
-        "http://localhost:3001/likes",
+        "https://social-media-api-josscodes.herokuapp.com/likes",
         { PostId: postId },
         { headers: { accessToken: localStorage.getItem("accessToken") } }
       )

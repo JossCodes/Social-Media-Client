@@ -13,19 +13,23 @@ const Post = () => {
   let history = useNavigate();
 
   useEffect(() => {
-    axios.get(`http://localhost:3001/posts/byId/${id}`).then((response) => {
-      setPostObject(response.data);
-    });
+    axios
+      .get(`https://social-media-api-josscodes.herokuapp.com/posts/byId/${id}`)
+      .then((response) => {
+        setPostObject(response.data);
+      });
 
-    axios.get(`http://localhost:3001/comments/${id}`).then((response) => {
-      setComments(response.data);
-    });
+    axios
+      .get(`https://social-media-api-josscodes.herokuapp.com/comments/${id}`)
+      .then((response) => {
+        setComments(response.data);
+      });
   }, [id]);
 
   const addComment = () => {
     axios
       .post(
-        "http://localhost:3001/comments",
+        "https://social-media-api-josscodes.herokuapp.com/comments",
         {
           commentBody: newComment,
           PostId: id,
@@ -54,11 +58,14 @@ const Post = () => {
 
   const deleteComment = (id) => {
     axios
-      .delete(`http://localhost:3001/comments/${id}`, {
-        headers: {
-          accessToken: localStorage.getItem("accessToken"),
-        },
-      })
+      .delete(
+        `https://social-media-api-josscodes.herokuapp.com/comments/${id}`,
+        {
+          headers: {
+            accessToken: localStorage.getItem("accessToken"),
+          },
+        }
+      )
       .then(() => {
         setComments(comments.filter((val) => val.id !== id));
       });
@@ -66,7 +73,7 @@ const Post = () => {
 
   const deletePost = (id) => {
     axios
-      .delete(`http://localhost:3001/posts/${id}`, {
+      .delete(`https://social-media-api-josscodes.herokuapp.com/posts/${id}`, {
         headers: {
           accessToken: localStorage.getItem("accessToken"),
         },
@@ -80,7 +87,7 @@ const Post = () => {
     if (option === "title") {
       let newTitle = prompt("Enter New Title:");
       axios.put(
-        "http://localhost:3001/posts/title",
+        "https://social-media-api-josscodes.herokuapp.com/posts/title",
         {
           newTitle: newTitle,
           id: id,
@@ -96,7 +103,7 @@ const Post = () => {
     } else {
       let newText = prompt("Enter New Text:");
       axios.put(
-        "http://localhost:3001/posts/postText",
+        "https://social-media-api-josscodes.herokuapp.com/posts/postText",
         {
           newText: newText,
           id: id,

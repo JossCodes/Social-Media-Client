@@ -12,13 +12,21 @@ const Profile = () => {
   let history = useNavigate();
 
   useEffect(() => {
-    axios.get(`http://localhost:3001/auth/basicInfo/${id}`).then((response) => {
-      setUsername(response.data.username);
-    });
+    axios
+      .get(
+        `https://social-media-api-josscodes.herokuapp.com/auth/basicInfo/${id}`
+      )
+      .then((response) => {
+        setUsername(response.data.username);
+      });
 
-    axios.get(`http://localhost:3001/posts/byuserId/${id}`).then((response) => {
-      setListOfPosts(response.data);
-    });
+    axios
+      .get(
+        `https://social-media-api-josscodes.herokuapp.com/posts/byuserId/${id}`
+      )
+      .then((response) => {
+        setListOfPosts(response.data);
+      });
   }, []);
 
   return (
